@@ -1,21 +1,24 @@
 {
-  "version": 2,
   "builds": [
     {
-      "src": "groww_api/manage.py",
-      "use": "@vercel/python"
+      "src": "groww_api/wsgi.py",
+      "use": "@vercel/python",
+      "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
+    },
+    {
+      "src": "build_files.sh",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "staticfiles_build" }
     }
   ],
   "routes": [
     {
-      "src": "groww_api/manage.py",
-      "dest": "/.vercel/output/functions/app/handler.py"
-    }
-  ],
-  "run": [
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
     {
-      "src": "groww_api/manage.py",
-      "use": "python manage.py runserver"
+      "src": "/(.*)",
+      "dest": "groww_api/wsgi.py"
     }
   ]
 }
