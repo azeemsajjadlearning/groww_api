@@ -11,8 +11,11 @@
       "src": "groww_api/manage.py",
       "dest": "/.vercel/output/functions/app/handler.py"
     }
-  ],"run":[{
-    "src": "groww_api/manage.py",
-    "use":"python manage.py runserver"
-  }]
+  ],
+  "run": [
+    {
+      "src": "groww_api/manage.py",
+      "use": "python manage.py runserver"
+    }
+  ]
 }
